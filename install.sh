@@ -1,5 +1,5 @@
 #!/bin/bash
-git clone "placeholder"
+git clone https://github.com/fabioalmeida08/bootstrap-cli.git
 cd bootstrap-cli
 
 python3 -m venv .venv
