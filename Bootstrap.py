@@ -1,6 +1,5 @@
 from pathlib import Path
-import requests
-
+import shutil
 
 class Terraform_bootstrap:
     def __init__(self):
@@ -8,16 +7,17 @@ class Terraform_bootstrap:
 
     def create_gitignore(self):
         currrent_dir = self.cwd
-        gitignore_file = currrent_dir / ".gitignore"
-        gitignore = requests.get(
-            "https://www.toptal.com/developers/gitignore/api/osx,linux,python,windows,pycharm,visualstudiocode,sam,sam+config,terraform"
-        )
-        gitignore_file.write_text(gitignore.text)
+        # gitignore_file = currrent_dir / ".gitignore"
+        # gitignore = requests.get(
+        #     "https://www.toptal.com/developers/gitignore/api/osx,linux,python,windows,pycharm,visualstudiocode,sam,sam+config,terraform"
+        # )
+        # gitignore_file.write_text(gitignore.text)
+        shutil.copy("gitignorefile", currrent_dir / "gitignore")
 
     def create_readme(self):
         Path.touch(self.cwd / "README.md")
 
-    def create_github_actions(self):
+    def create_github_actions_workflow(self):
         deploy_yml = self.cwd / ".github" / "workflows" / "deploy.yml"
         deploy_yml.parent.mkdir(parents=True, exist_ok=True)
         deploy_yml.write_text(
@@ -187,5 +187,5 @@ variable "project_name" {
     def start(self):
         self.create_gitignore()
         self.create_readme()
-        self.create_github_actions()
+        self.create_github_actions_workflow()
         self.create_terraform_template()
