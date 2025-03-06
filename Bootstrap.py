@@ -12,7 +12,8 @@ class Terraform_bootstrap:
         #     "https://www.toptal.com/developers/gitignore/api/osx,linux,python,windows,pycharm,visualstudiocode,sam,sam+config,terraform"
         # )
         # gitignore_file.write_text(gitignore.text)
-        shutil.copy("gitignorefile", currrent_dir / "gitignore")
+        gitignore_file = Path(__file__).parent / "gitignorefile"
+        shutil.copy(gitignore_file, currrent_dir / ".gitignore")
 
     def create_readme(self):
         Path.touch(self.cwd / "README.md")
