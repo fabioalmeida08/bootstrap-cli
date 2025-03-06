@@ -7,7 +7,7 @@
 # deactivate
 
 touch bootstrap.sh
-script_dir_abs="$(cd "$script_dir" && pwd)"
+script_dir_abs=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 cat <<EOF > bootstrap.sh
 #!/bin/bash
 python3 $script_dir_abs/main.py "\$@"
