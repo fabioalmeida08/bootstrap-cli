@@ -28,7 +28,7 @@ class Terraform_bootstrap:
 # - BACKEND_REGION / região do bucket s3
 # - AWS_ASSUME_ROLE_ARN / arn da role que o workflow vai assumir para executar o terraform
 
-name: 'Terraform Workflow'
+name: 'Deploy Workflow'
 
 on:
   push:
