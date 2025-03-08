@@ -258,13 +258,6 @@ jobs:
             if dir == dev_dir or dir == prod_dir:
                 Path.touch(dir / "terraform.tfvars")
 
-        (infra_dir / "destroy_config.json").write_text(
-            """{
-  "dev": false,
-  "prod": false
-}
-      """
-        )
 
         terraform_files = ["main.tf", "providers.tf", "variables.tf", "backend.tf"]
         for file in terraform_files:
@@ -313,8 +306,21 @@ variable "project_name" {
                 )
             (infra_dir / file).touch()
 
+
+    def create_destroy_config(self):
+        destroy_dir = self.cwd / "destroy"
+        destroy_dir.mkdir(parents=True, exist_ok=True)
+        destroy_config = destroy_dir / "destroy_config.json"
+        destroy_config.write_text(
+            """{
+  "dev": false,
+  "prod": false
+}
+            """
+        )
     def start(self):
         self.create_gitignore()
         self.create_readme()
         self.create_github_actions_workflow()
+        self.create_destroy_config()
         self.create_terraform_template()
